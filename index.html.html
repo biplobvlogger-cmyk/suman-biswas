@@ -1,0 +1,2079 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS SUMAN GFX - Graphic Design Portfolio & Order System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #4cc9f0;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fefefe;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: -5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 5px;
+            background-color: var(--light-gray);
+            border-radius: 20px;
+            padding: 5px;
+        }
+
+        .lang-btn {
+            padding: 6px 15px;
+            border-radius: 15px;
+            border: none;
+            background: transparent;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lang-btn.active {
+            background-color: white;
+            color: var(--primary);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05) 0%, rgba(114, 9, 183, 0.05) 100%);
+            border-radius: 0 0 40px 40px;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(67, 97, 238, 0.05);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .design-showcase {
+            width: 100%;
+            max-width: 500px;
+            height: 350px;
+            background: linear-gradient(135deg, #4361ee, #7209b7);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .design-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+            opacity: 0.7;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .floating-1 {
+            width: 120px;
+            height: 120px;
+            top: 20px;
+            left: 20px;
+            background: url('https://images.unsplash.com/photo-1586717799252-bd134ad00e26?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;
+        }
+
+        .floating-2 {
+            width: 150px;
+            height: 100px;
+            bottom: 40px;
+            right: 30px;
+            background: url('https://images.unsplash.com/photo-1586232702178-f044c5f4d4b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;
+        }
+
+        .floating-3 {
+            width: 100px;
+            height: 140px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;
+        }
+
+        /* Portfolio Section */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .portfolio-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            background-color: white;
+            height: 280px;
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        /* Upload System */
+        .upload-section {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .upload-section h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .upload-option {
+            border: 3px dashed var(--primary);
+            border-radius: var(--border-radius);
+            padding: 60px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background-color: rgba(67, 97, 238, 0.03);
+        }
+
+        .upload-option:hover {
+            background-color: rgba(67, 97, 238, 0.08);
+        }
+
+        .upload-option i {
+            font-size: 60px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .upload-option h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .upload-option p {
+            color: var(--gray);
+        }
+
+        .upload-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .preview-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 150px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgba(220, 53, 69, 0.9);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .remove-btn:hover {
+            background-color: #dc3545;
+        }
+
+        /* Order System */
+        .order-section {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05) 0%, rgba(114, 9, 183, 0.05) 100%);
+            border-radius: var(--border-radius);
+            padding: 40px;
+        }
+
+        .order-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 25px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .login-form, .order-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .whatsapp-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(37, 211, 102, 0.1);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+            color: #075e54;
+        }
+
+        .whatsapp-note i {
+            color: #25d366;
+            font-size: 24px;
+        }
+
+        /* Review System */
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .review-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .review-date {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .star-rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .review-text {
+            color: var(--dark);
+            line-height: 1.7;
+        }
+
+        .add-review {
+            background-color: var(--light);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 40px;
+        }
+
+        .star-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .star-input i {
+            font-size: 24px;
+            color: var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .star-input i.active {
+            color: #ffc107;
+        }
+
+        /* AI Chat System */
+        .chat-section {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chat-header i {
+            font-size: 24px;
+        }
+
+        .chat-body {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 15px;
+            border-radius: 18px;
+            word-wrap: break-word;
+        }
+
+        .bot-message {
+            background-color: var(--light-gray);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background-color: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid var(--light-gray);
+            border-radius: 30px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+        }
+
+        .chat-input button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chat-input button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .emergency-notice {
+            background-color: rgba(247, 37, 133, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #adb5bd;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                text-align: center;
+            }
+            
+            .hero-text p {
+                margin: 0 auto 30px;
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .design-showcase {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-text h2 {
+                font-size: 32px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .upload-section, .order-section, .chat-section {
+                padding: 25px;
+            }
+            
+            .login-form, .order-form {
+                padding: 25px;
+            }
+            
+            .step {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                padding: 12px 24px;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .reviews-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-4 {
+            margin-top: 40px;
+        }
+
+        .mb-4 {
+            margin-bottom: 40px;
+        }
+
+        .mt-2 {
+            margin-top: 20px;
+        }
+
+        .mb-2 {
+            margin-bottom: 20px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal h3 {
+            margin-bottom: 20px;
+        }
+
+        .otp-inputs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+        }
+
+        .otp-input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">JS</div>
+                <div class="logo-text">
+                    <h1>JS SUMAN GFX</h1>
+                    <p>Graphic Design Portfolio & Order System</p>
+                </div>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#order">Order</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#chat">Chat</a>
+                
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="bn">বাং</button>
+                    <button class="lang-btn" data-lang="hi">हिं</button>
+                </div>
+            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div class="mobile-nav hidden" id="mobileNav">
+        <div class="container">
+            <a href="#home">Home</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#order">Order</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#chat">Chat</a>
+            
+            <div class="language-switcher mt-4">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="bn">বাং</button>
+                <button class="lang-btn" data-lang="hi">हिं</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h2 class="en">Professional Graphic Design Services</h2>
+                <h2 class="bn hidden">পেশাদার গ্রাফিক ডিজাইন সেবা</h2>
+                <h2 class="hi hidden">पेशेवर ग्राफिक डिज़ाइन सेवाएं</h2>
+                
+                <p class="en">Welcome to JS SUMAN GFX. Browse my design portfolio, place orders directly, and get professional graphic design solutions delivered to you.</p>
+                <p class="bn hidden">জেএস সুমন জিএফএক্সে স্বাগতম। আমার ডিজাইন পোর্টফোলিও ব্রাউজ করুন, সরাসরি অর্ডার করুন এবং আপনার কাছে পেশাদার গ্রাফিক ডিজাইন সমাধান পান।</p>
+                <p class="hi hidden">जेएस सुमन GFX में आपका स्वागत है। मेरे डिज़ाइन पोर्टफोलियो को ब्राउज़ करें, सीधे ऑर्डर दें और पेशेवर ग्राफिक डिज़ाइन समाधान प्राप्त करें।</p>
+                
+                <div class="cta-buttons">
+                    <a href="#portfolio" class="btn btn-primary">
+                        <i class="fas fa-images"></i>
+                        <span class="en">View Portfolio</span>
+                        <span class="bn hidden">পোর্টফোলিও দেখুন</span>
+                        <span class="hi hidden">पोर्टफोलियो देखें</span>
+                    </a>
+                    <a href="#order" class="btn btn-secondary">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="en">Place Order</span>
+                        <span class="bn hidden">অর্ডার করুন</span>
+                        <span class="hi hidden">ऑर्डर करें</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="design-showcase">
+                    <div class="floating-element floating-1"></div>
+                    <div class="floating-element floating-2"></div>
+                    <div class="floating-element floating-3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="en">Design Portfolio</h2>
+                <h2 class="bn hidden">ডিজাইন পোর্টফোলিও</h2>
+                <h2 class="hi hidden">डिज़ाइन पोर्टफोलियो</h2>
+                <p class="en">Explore my latest graphic design works. Click on any design for details.</p>
+                <p class="bn hidden">আমার সর্বশেষ গ্রাফিক ডিজাইন কাজগুলি অন্বেষণ করুন। বিস্তারিত জানতে কোনও ডিজাইনে ক্লিক করুন।</p>
+                <p class="hi hidden">मेरे नवीनतम ग्राफिक डिज़ाइन कार्यों का अन्वेषण करें। विवरण के लिए किसी भी डिज़ाइन पर क्लिक करें।</p>
+            </div>
+            
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- Portfolio items will be loaded dynamically -->
+            </div>
+            
+            <!-- Admin Upload Section -->
+            <div class="upload-section">
+                <h3 class="en">Admin: Upload New Portfolio Images</h3>
+                <h3 class="bn hidden">অ্যাডমিন: নতুন পোর্টফোলিও ছবি আপলোড করুন</h3>
+                <h3 class="hi hidden">एडमिन: नया पोर्टफोलियो इमेज अपलोड करें</h3>
+                
+                <!-- Upload Interface -->
+                <div class="upload-option" id="uploadBox">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3 class="en">Click to Upload Photos</h3>
+                    <h3 class="bn hidden">ছবি আপলোড করতে ক্লিক করুন</h3>
+                    <h3 class="hi hidden">फ़ोटो अपलोड करने के लिए क्लिक करें</h3>
+                    <p class="en">PNG, JPG, JPEG</p>
+                    <p class="bn hidden">PNG, JPG, JPEG</p>
+                    <p class="hi hidden">PNG, JPG, JPEG</p>
+                </div>
+                
+                <!-- File Input (Hidden) -->
+                <input type="file" id="imageUpload" accept="image/*" multiple hidden>
+                
+                <!-- Preview Container -->
+                <div class="upload-preview" id="previewContainer"></div>
+                
+                <div class="whatsapp-note mt-4">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <strong class="en">Note:</strong> <strong class="bn hidden">নোট:</strong> <strong class="hi hidden">नोट:</strong>
+                        <span class="en">Google Drive upload requires API integration. Currently using local upload simulation.</span>
+                        <span class="bn hidden">গুগল ড্রাইভ আপলোডের জন্য API ইন্টিগ্রেশন প্রয়োজন। বর্তমানে স্থানীয় আপলোড সিমুলেশন ব্যবহার করা হচ্ছে।</span>
+                        <span class="hi hidden">Google Drive अपलोड के लिए API एकीकरण की आवश्यकता है। वर्तमान में स्थानीय अपलोड सिमुलेशन का उपयोग किया जा रहा है।</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order System -->
+    <section class="section" id="order">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="en">Place Your Order</h2>
+                <h2 class="bn hidden">আপনার অর্ডার দিন</h2>
+                <h2 class="hi hidden">अपना ऑर्डर दें</h2>
+                <p class="en">Order process: Login with WhatsApp → Choose design → Confirm order</p>
+                <p class="bn hidden">অর্ডার প্রক্রিয়া: WhatsApp দিয়ে লগইন করুন → ডিজাইন চয়ন করুন → অর্ডার নিশ্চিত করুন</p>
+                <p class="hi hidden">ऑर्डर प्रक्रिया: WhatsApp के साथ लॉगिन करें → डिज़ाइन चुनें → ऑर्डर पुष्टि करें</p>
+            </div>
+            
+            <!-- Order Steps -->
+            <div class="order-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="en">Login with WhatsApp</h3>
+                    <h3 class="bn hidden">WhatsApp দিয়ে লগইন করুন</h3>
+                    <h3 class="hi hidden">WhatsApp के साथ लॉगिन करें</h3>
+                    <p class="en">Enter your mobile number to receive OTP via WhatsApp</p>
+                    <p class="bn hidden">WhatsApp এর মাধ্যমে OTP পেতে আপনার মোবাইল নম্বর লিখুন</p>
+                    <p class="hi hidden">WhatsApp के माध्यम से OTP प्राप्त करने के लिए अपना मोबाइल नंबर दर्ज करें</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="en">Choose Design</h3>
+                    <h3 class="bn hidden">ডিজাইন চয়ন করুন</h3>
+                    <h3 class="hi hidden">डिज़ाइन चुनें</h3>
+                    <p class="en">Select from portfolio or describe your custom design requirements</p>
+                    <p class="bn hidden">পোর্টফোলিও থেকে নির্বাচন করুন বা আপনার কাস্টম ডিজাইন প্রয়োজনীয়তা বর্ণনা করুন</p>
+                    <p class="hi hidden">पोर्टफोलियो से चुनें या अपनी कस्टम डिज़ाइन आवश्यकताओं का वर्णन करें</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="en">Confirm Order</h3>
+                    <h3 class="bn hidden">অর্ডার নিশ্চিত করুন</h3>
+                    <h3 class="hi hidden">ऑर्डर पुष्टि करें</h3>
+                    <p class="en">Order details sent to WhatsApp for confirmation and payment</p>
+                    <p class="bn hidden">নিশ্চিতকরণ এবং পেমেন্টের জন্য অর্ডার বিবরণ WhatsApp এ পাঠানো হয়েছে</p>
+                    <p class="hi hidden">पुष्टि और भुगतान के लिए ऑर्डर विवरण WhatsApp पर भेजा गया</p>
+                </div>
+            </div>
+            
+            <!-- Login Form -->
+            <div class="login-form" id="loginForm">
+                <h3 class="en">Login with WhatsApp</h3>
+                <h3 class="bn hidden">WhatsApp দিয়ে লগইন করুন</h3>
+                <h3 class="hi hidden">WhatsApp के साथ लॉगिन करें</h3>
+                
+                <div class="form-group">
+                    <label for="phoneNumber" class="en">Mobile Number</label>
+                    <label for="phoneNumber" class="bn hidden">মোবাইল নম্বর</label>
+                    <label for="phoneNumber" class="hi hidden">मोबाइल नंबर</label>
+                    <input type="tel" id="phoneNumber" class="form-control" placeholder="+91 8926702629" value="+91 8926702629">
+                </div>
+                
+                <button class="btn btn-primary" id="sendOTPBtn">
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="en">Send OTP via WhatsApp</span>
+                    <span class="bn hidden">WhatsApp এর মাধ্যমে OTP পাঠান</span>
+                    <span class="hi hidden">WhatsApp के माध्यम से OTP भेजें</span>
+                </button>
+                
+                <div class="whatsapp-note">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <strong class="en">Note:</strong> <strong class="bn hidden">নোট:</strong> <strong class="hi hidden">नोट:</strong>
+                        <span class="en">OTP via WhatsApp requires backend + WhatsApp API integration. Currently simulating the flow.</span>
+                        <span class="bn hidden">WhatsApp এর মাধ্যমে OTP পাঠাতে ব্যাকএন্ড + WhatsApp API ইন্টিগ্রেশন প্রয়োজন। বর্তমানে প্রবাহ সিমুলেট করা হচ্ছে।</span>
+                        <span class="hi hidden">WhatsApp के माध्यम से OTP के लिए बैकएंड + WhatsApp API एकीकरण की आवश्यकता है। वर्तमान में प्रवाह सिम्युलेट किया जा रहा है।</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Form (Initially Hidden) -->
+            <div class="order-form hidden" id="orderForm">
+                <h3 class="en">Place Your Order</h3>
+                <h3 class="bn hidden">আপনার অর্ডার দিন</h3>
+                <h3 class="hi hidden">अपना ऑर्डर दें</h3>
+                
+                <div class="form-group">
+                    <label for="orderType" class="en">Design Type</label>
+                    <label for="orderType" class="bn hidden">ডিজাইন প্রকার</label>
+                    <label for="orderType" class="hi hidden">डिज़ाइन प्रकार</label>
+                    <select id="orderType" class="form-control">
+                        <option value="logo" class="en">Logo Design</option>
+                        <option value="logo" class="bn hidden">লোগো ডিজাইন</option>
+                        <option value="logo" class="hi hidden">लोगो डिज़ाइन</option>
+                        
+                        <option value="banner" class="en">Banner Design</option>
+                        <option value="banner" class="bn hidden">ব্যানার ডিজাইন</option>
+                        <option value="banner" class="hi hidden">बैनर डिज़ाइन</option>
+                        
+                        <option value="social" class="en">Social Media Post</option>
+                        <option value="social" class="bn hidden">সোশ্যাল মিডিয়া পোস্ট</option>
+                        <option value="social" class="hi hidden">सोशल मीडिया पोस्ट</option>
+                        
+                        <option value="custom" class="en">Custom Design</option>
+                        <option value="custom" class="bn hidden">কাস্টম ডিজাইন</option>
+                        <option value="custom" class="hi hidden">कस्टम डिज़ाइन</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orderDetails" class="en">Order Details / Requirements</label>
+                    <label for="orderDetails" class="bn hidden">অর্ডার বিবরণ / প্রয়োজনীয়তা</label>
+                    <label for="orderDetails" class="hi hidden">ऑर्डर विवरण / आवश्यकताएं</label>
+                    <textarea id="orderDetails" class="form-control" rows="4" placeholder="Describe your design requirements..."></textarea>
+                </div>
+                
+                <button class="btn btn-primary" id="placeOrderBtn">
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="en">Confirm Order via WhatsApp</span>
+                    <span class="bn hidden">WhatsApp এর মাধ্যমে অর্ডার নিশ্চিত করুন</span>
+                    <span class="hi hidden">WhatsApp के माध्यम से ऑर्डर पुष्टि करें</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="section" id="reviews">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="en">Customer Reviews</h2>
+                <h2 class="bn hidden">গ্রাহক পর্যালোচনা</h2>
+                <h2 class="hi hidden">ग्राहक समीक्षाएं</h2>
+                <p class="en">What our clients say about our design services</p>
+                <p class="bn hidden">আমাদের ডিজাইন সেবা সম্পর্কে আমাদের ক্লায়েন্টরা কী বলেন</p>
+                <p class="hi hidden">हमारी डिज़ाइन सेवाओं के बारे में हमारे ग्राहक क्या कहते हैं</p>
+            </div>
+            
+            <!-- Reviews Container -->
+            <div class="reviews-container" id="reviewsContainer">
+                <!-- Reviews will be loaded dynamically -->
+            </div>
+            
+            <!-- Add Review Form -->
+            <div class="add-review">
+                <h3 class="en">Add Your Review</h3>
+                <h3 class="bn hidden">আপনার পর্যালোচনা যোগ করুন</h3>
+                <h3 class="hi hidden">अपनी समीक्षा जोड़ें</h3>
+                
+                <div class="form-group">
+                    <label class="en">Your Rating</label>
+                    <label class="bn hidden">আপনার রেটিং</label>
+                    <label class="hi hidden">आपकी रेटिंग</label>
+                    <div class="star-input">
+                        <i class="fas fa-star" data-rating="1"></i>
+                        <i class="fas fa-star" data-rating="2"></i>
+                        <i class="fas fa-star" data-rating="3"></i>
+                        <i class="fas fa-star" data-rating="4"></i>
+                        <i class="fas fa-star" data-rating="5"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reviewText" class="en">Your Review</label>
+                    <label for="reviewText" class="bn hidden">আপনার পর্যালোচনা</label>
+                    <label for="reviewText" class="hi hidden">आपकी समीक्षा</label>
+                    <textarea id="reviewText" class="form-control" rows="3" placeholder="Share your experience..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reviewPhone" class="en">Mobile Number (for verification)</label>
+                    <label for="reviewPhone" class="bn hidden">মোবাইল নম্বর (যাচাইকরণের জন্য)</label>
+                    <label for="reviewPhone" class="hi hidden">मोबाइल नंबर (सत्यापन के लिए)</label>
+                    <input type="tel" id="reviewPhone" class="form-control" placeholder="+91 XXXXX XXXXX">
+                </div>
+                
+                <button class="btn btn-primary" id="submitReviewBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    <span class="en">Submit Review</span>
+                    <span class="bn hidden">পর্যালোচনা জমা দিন</span>
+                    <span class="hi hidden">समीक्षा सबमिट करें</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat System -->
+    <section class="section" id="chat">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="en">24×7 AI Chat Support</h2>
+                <h2 class="bn hidden">24×7 AI চ্যাট সমর্থন</h2>
+                <h2 class="hi hidden">24×7 एआई चैट सहायता</h2>
+                <p class="en">Get instant answers to your questions about design services</p>
+                <p class="bn hidden">ডিজাইন সেবা সম্পর্কে আপনার প্রশ্নের তাৎক্ষণিক উত্তর পান</p>
+                <p class="hi hidden">डिज़ाइन सेवाओं के बारे में अपने प्रश्नों के त्वरित उत्तर प्राप्त करें</p>
+            </div>
+            
+            <div class="chat-section">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h3 class="en">AI Design Assistant</h3>
+                            <h3 class="bn hidden">এআই ডিজাইন সহকারী</h3>
+                            <h3 class="hi hidden">एआई डिज़ाइन सहायक</h3>
+                            <p class="en">Ask me anything about design services</p>
+                            <p class="bn hidden">ডিজাইন সেবা সম্পর্কে আমাকে কিছু জিজ্ঞাসা করুন</p>
+                            <p class="hi hidden">डिज़ाइन सेवाओं के बारे में मुझसे कुछ भी पूछें</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-body" id="chatBody">
+                        <div class="message bot-message">
+                            <p class="en">Hello! I'm your AI Design Assistant. How can I help you today? You can ask about design services, pricing, order process, or anything else related to JS SUMAN GFX.</p>
+                            <p class="bn hidden">হ্যালো! আমি আপনার এআই ডিজাইন সহকারী। আজ আমি আপনাকে কীভাবে সাহায্য করতে পারি? আপনি ডিজাইন সেবা, মূল্য, অর্ডার প্রক্রিয়া বা জেএস সুমন জিএফএক্স সম্পর্কিত অন্য কোনও বিষয় জিজ্ঞাসা করতে পারেন।</p>
+                            <p class="hi hidden">नमस्ते! मैं आपका एआई डिज़ाइन सहायक हूं। आज मैं आपकी कैसे मदद कर सकता हूं? आप डिज़ाइन सेवाओं, मूल्य निर्धारण, ऑर्डर प्रक्रिया या जेएस सुमन GFX से संबंधित कुछ भी पूछ सकते हैं।</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Type your message...">
+                        <button id="sendChatBtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="emergency-notice">
+                    <p class="en"><strong>Emergency?</strong> If you need immediate human assistance, WhatsApp: <strong>+91 8926702629</strong></p>
+                    <p class="bn hidden"><strong>জরুরী?</strong> যদি আপনার অবিলম্বে মানুষের সহায়তা প্রয়োজন হয়, WhatsApp: <strong>+91 8926702629</strong></p>
+                    <p class="hi hidden"><strong>आपातकाल?</strong> यदि आपको तत्काल मानव सहायता की आवश्यकता है, WhatsApp: <strong>+91 8926702629</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>JS SUMAN GFX</h3>
+                    <p>Professional graphic design services with portfolio-based ordering system.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="en">Quick Links</h3>
+                    <h3 class="bn hidden">দ্রুত লিংক</h3>
+                    <h3 class="hi hidden">त्वरित लिंक</h3>
+                    <a href="#home" class="en">Home</a>
+                    <a href="#home" class="bn hidden">হোম</a>
+                    <a href="#home" class="hi hidden">होम</a>
+                    
+                    <a href="#portfolio" class="en">Portfolio</a>
+                    <a href="#portfolio" class="bn hidden">পোর্টফোলিও</a>
+                    <a href="#portfolio" class="hi hidden">पोर्टफोलियो</a>
+                    
+                    <a href="#order" class="en">Order</a>
+                    <a href="#order" class="bn hidden">অর্ডার</a>
+                    <a href="#order" class="hi hidden">ऑर्डर</a>
+                    
+                    <a href="#reviews" class="en">Reviews</a>
+                    <a href="#reviews" class="bn hidden">পর্যালোচনা</a>
+                    <a href="#reviews" class="hi hidden">समीक्षाएं</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="en">Contact Info</h3>
+                    <h3 class="bn hidden">যোগাযোগের তথ্য</h3>
+                    <h3 class="hi hidden">संपर्क जानकारी</h3>
+                    <p><i class="fas fa-phone-alt"></i> +91 8926702629</p>
+                    <p><i class="fab fa-whatsapp"></i> WhatsApp: +91 8926702629</p>
+                    <p><i class="fas fa-envelope"></i> jssumangfx@example.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Kolkata, India</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="en">Services</h3>
+                    <h3 class="bn hidden">সেবা</h3>
+                    <h3 class="hi hidden">सेवाएं</h3>
+                    <p class="en">Logo Design</p>
+                    <p class="bn hidden">লোগো ডিজাইন</p>
+                    <p class="hi hidden">लोगो डिज़ाइन</p>
+                    
+                    <p class="en">Banner Design</p>
+                    <p class="bn hidden">ব্যানার ডিজাইন</p>
+                    <p class="hi hidden">बैनर डिज़ाइन</p>
+                    
+                    <p class="en">Social Media Graphics</p>
+                    <p class="bn hidden">সোশ্যাল মিডিয়া গ্রাফিক্স</p>
+                    <p class="hi hidden">सोशल मीडिया ग्राफिक्स</p>
+                    
+                    <p class="en">Custom Illustrations</p>
+                    <p class="bn hidden">কাস্টম চিত্রণ</p>
+                    <p class="hi hidden">कस्टम चित्रण</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 JS SUMAN GFX. <span class="en">All rights reserved.</span><span class="bn hidden">সর্বস্বত্ব সংরক্ষিত।</span><span class="hi hidden">सर्वाधिकार सुरक्षित।</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- OTP Modal -->
+    <div class="modal" id="otpModal">
+        <div class="modal-content">
+            <div class="close-modal" id="closeOtpModal">&times;</div>
+            <h3 class="en">Enter OTP</h3>
+            <h3 class="bn hidden">OTP লিখুন</h3>
+            <h3 class="hi hidden">OTP दर्ज करें</h3>
+            
+            <p class="en">OTP has been sent to your WhatsApp number. Please enter it below:</p>
+            <p class="bn hidden">OTP আপনার WhatsApp নম্বরে পাঠানো হয়েছে। দয়া করে নীচে এটি লিখুন:</p>
+            <p class="hi hidden">OTP आपके WhatsApp नंबर पर भेजा गया है। कृपया इसे नीचे दर्ज करें:</p>
+            
+            <div class="otp-inputs">
+                <input type="text" class="otp-input" maxlength="1" data-index="0">
+                <input type="text" class="otp-input" maxlength="1" data-index="1">
+                <input type="text" class="otp-input" maxlength="1" data-index="2">
+                <input type="text" class="otp-input" maxlength="1" data-index="3">
+                <input type="text" class="otp-input" maxlength="1" data-index="4">
+                <input type="text" class="otp-input" maxlength="1" data-index="5">
+            </div>
+            
+            <button class="btn btn-primary" id="verifyOtpBtn">
+                <span class="en">Verify OTP</span>
+                <span class="bn hidden">OTP যাচাই করুন</span>
+                <span class="hi hidden">OTP सत्यापित करें</span>
+            </button>
+            
+            <p class="mt-2 en">Demo OTP: <strong>123456</strong></p>
+            <p class="mt-2 bn hidden">ডেমো OTP: <strong>123456</strong></p>
+            <p class="mt-2 hi hidden">डेमो OTP: <strong>123456</strong></p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="close-modal" id="closeSuccessModal">&times;</div>
+            <div class="text-center">
+                <i class="fas fa-check-circle" style="font-size: 60px; color: var(--success); margin-bottom: 20px;"></i>
+                <h3 class="en" id="successTitle">Success!</h3>
+                <h3 class="bn hidden" id="successTitleBn">সফল!</h3>
+                <h3 class="hi hidden" id="successTitleHi">सफलता!</h3>
+                
+                <p id="successMessage"></p>
+                
+                <button class="btn btn-primary mt-4" id="closeSuccessBtn">
+                    <span class="en">Continue</span>
+                    <span class="bn hidden">চালিয়ে যান</span>
+                    <span class="hi hidden">जारी रखें</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize portfolio
+            initPortfolio();
+            
+            // Initialize reviews
+            initReviews();
+            
+            // Initialize upload system
+            initUploadSystem();
+            
+            // Initialize order system
+            initOrderSystem();
+            
+            // Initialize chat system
+            initChatSystem();
+            
+            // Initialize language switcher
+            initLanguageSwitcher();
+            
+            // Initialize mobile menu
+            initMobileMenu();
+            
+            // Initialize modals
+            initModals();
+        });
+
+        // Portfolio System
+        function initPortfolio() {
+            const portfolioGrid = document.getElementById('portfolioGrid');
+            const portfolioItems = [
+                {
+                    id: 1,
+                    title: 'Modern Logo Design',
+                    category: 'Logo',
+                    image: 'https://images.unsplash.com/photo-1611262588024-d12430b98920?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                },
+                {
+                    id: 2,
+                    title: 'Business Banner',
+                    category: 'Banner',
+                    image: 'https://images.unsplash.com/photo-1586232702178-f044c5f4d4b7?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80'
+                },
+                {
+                    id: 3,
+                    title: 'Social Media Post',
+                    category: 'Social Media',
+                    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                },
+                {
+                    id: 4,
+                    title: 'Brand Identity',
+                    category: 'Branding',
+                    image: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                },
+                {
+                    id: 5,
+                    title: 'Product Packaging',
+                    category: 'Packaging',
+                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                },
+                {
+                    id: 6,
+                    title: 'Flyer Design',
+                    category: 'Print',
+                    image: 'https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                },
+                {
+                    id: 7,
+                    title: 'Website UI Design',
+                    category: 'Web Design',
+                    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                },
+                {
+                    id: 8,
+                    title: 'Mobile App UI',
+                    category: 'UI/UX',
+                    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                }
+            ];
+            
+            // Load portfolio items
+            portfolioItems.forEach(item => {
+                const portfolioItem = document.createElement('div');
+                portfolioItem.className = 'portfolio-item';
+                portfolioItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h4>${item.title}</h4>
+                        <p>${item.category}</p>
+                    </div>
+                `;
+                portfolioGrid.appendChild(portfolioItem);
+            });
+        }
+
+        // Upload System
+        function initUploadSystem() {
+            const uploadBox = document.getElementById("uploadBox");
+            const fileInput = document.getElementById("imageUpload");
+            const previewContainer = document.getElementById("previewContainer");
+
+            uploadBox.addEventListener("click", () => {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener("change", () => {
+                previewContainer.innerHTML = "";
+
+                Array.from(fileInput.files).forEach((file) => {
+                    if (!file.type.startsWith("image/")) return;
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const div = document.createElement("div");
+                        div.className = "preview-item";
+                        div.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview">
+                            <button class="remove-btn">&times;</button>
+                        `;
+                        div.querySelector(".remove-btn").onclick = () => div.remove();
+                        previewContainer.appendChild(div);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+        }
+
+        // Review System
+        function initReviews() {
+            const reviewsContainer = document.getElementById('reviewsContainer');
+            const reviews = [
+                {
+                    id: 1,
+                    name: 'Rajesh Kumar',
+                    rating: 5,
+                    text: 'Excellent logo design service. Very professional and delivered before deadline.',
+                    date: '2023-10-15',
+                    phone: '+91 XXXXX XXXXX'
+                },
+                {
+                    id: 2,
+                    name: 'Priya Sharma',
+                    rating: 4,
+                    text: 'Beautiful social media graphics. My engagement increased by 40% after using their designs.',
+                    date: '2023-09-28',
+                    phone: '+91 XXXXX XXXXX'
+                },
+                {
+                    id: 3,
+                    name: 'Amit Patel',
+                    rating: 5,
+                    text: 'Outstanding banner design for my shop. Attracted many customers. Highly recommended!',
+                    date: '2023-11-05',
+                    phone: '+91 XXXXX XXXXX'
+                }
+            ];
+            
+            // Load reviews
+            reviews.forEach(review => {
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'review-card';
+                reviewCard.innerHTML = `
+                    <div class="review-header">
+                        <div class="reviewer-name">${review.name}</div>
+                        <div class="review-date">${review.date}</div>
+                    </div>
+                    <div class="star-rating">
+                        ${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}
+                    </div>
+                    <div class="review-text">${review.text}</div>
+                `;
+                reviewsContainer.appendChild(reviewCard);
+            });
+            
+            // Submit review functionality
+            const submitReviewBtn = document.getElementById('submitReviewBtn');
+            const starInputs = document.querySelectorAll('.star-input i');
+            let selectedRating = 0;
+            
+            // Star rating selection
+            starInputs.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    selectedRating = rating;
+                    
+                    // Update star display
+                    starInputs.forEach((s, index) => {
+                        if (index < rating) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Submit review
+            submitReviewBtn.addEventListener('click', function() {
+                const reviewText = document.getElementById('reviewText').value;
+                const reviewPhone = document.getElementById('reviewPhone').value;
+                
+                if (!selectedRating) {
+                    showSuccess('Please select a rating', 'Please select a rating', 'একটি রেটিং নির্বাচন করুন', 'एक रेटिंग चुनें');
+                    return;
+                }
+                
+                if (!reviewText.trim()) {
+                    showSuccess('Please enter review text', 'Please enter review text', 'পর্যালোচনা পাঠ্য লিখুন', 'समीक्षा पाठ दर्ज करें');
+                    return;
+                }
+                
+                if (!reviewPhone.trim()) {
+                    showSuccess('Please enter phone number for verification', 'Please enter phone number for verification', 'যাচাইকরণের জন্য ফোন নম্বর লিখুন', 'सत्यापन के लिए फ़ोन नंबर दर्ज करें');
+                    return;
+                }
+                
+                // In a real app, you would send this to a backend
+                showSuccess(
+                    'Review submitted successfully! It will appear after verification.', 
+                    'Review submitted successfully! It will appear after verification.',
+                    'পর্যালোচনা সফলভাবে জমা দেওয়া হয়েছে! যাচাইকরণের পরে এটি প্রদর্শিত হবে।',
+                    'समीक्षा सफलतापूर्वक सबमिट की गई! सत्यापन के बाद यह दिखाई देगी।'
+                );
+                
+                // Clear form
+                document.getElementById('reviewText').value = '';
+                document.getElementById('reviewPhone').value = '';
+                starInputs.forEach(star => star.classList.remove('active'));
+                selectedRating = 0;
+            });
+        }
+
+        // Order System
+        function initOrderSystem() {
+            const sendOTPBtn = document.getElementById('sendOTPBtn');
+            const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+            const placeOrderBtn = document.getElementById('placeOrderBtn');
+            const loginForm = document.getElementById('loginForm');
+            const orderForm = document.getElementById('orderForm');
+            const otpInputs = document.querySelectorAll('.otp-input');
+            let isLoggedIn = false;
+            
+            // Send OTP button click
+            sendOTPBtn.addEventListener('click', function() {
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                
+                if (!phoneNumber.trim()) {
+                    showSuccess('Please enter phone number', 'Please enter phone number', 'ফোন নম্বর লিখুন', 'फ़ोन नंबर दर्ज करें');
+                    return;
+                }
+                
+                // Show OTP modal
+                document.getElementById('otpModal').style.display = 'flex';
+                
+                // Auto-focus first OTP input
+                setTimeout(() => {
+                    document.querySelector('.otp-input').focus();
+                }, 100);
+                
+                // In a real app, you would send OTP via WhatsApp API here
+                console.log(`OTP would be sent to ${phoneNumber} via WhatsApp API`);
+            });
+            
+            // OTP input navigation
+            otpInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const value = this.value;
+                    const index = parseInt(this.getAttribute('data-index'));
+                    
+                    // Auto-focus next input
+                    if (value && index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                });
+                
+                // Handle backspace
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && !this.value && this.previousElementSibling) {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        if (index > 0) {
+                            otpInputs[index - 1].focus();
+                        }
+                    }
+                });
+            });
+            
+            // Verify OTP
+            verifyOtpBtn.addEventListener('click', function() {
+                let otp = '';
+                otpInputs.forEach(input => {
+                    otp += input.value;
+                });
+                
+                // Demo OTP is 123456
+                if (otp === '123456') {
+                    // Success - show order form
+                    isLoggedIn = true;
+                    loginForm.classList.add('hidden');
+                    orderForm.classList.remove('hidden');
+                    
+                    // Close modal
+                    document.getElementById('otpModal').style.display = 'none';
+                    
+                    // Clear OTP inputs
+                    otpInputs.forEach(input => input.value = '');
+                    
+                    showSuccess(
+                        'Login successful! You can now place your order.',
+                        'Login successful! You can now place your order.',
+                        'লগইন সফল! আপনি এখন আপনার অর্ডার দিতে পারেন।',
+                        'लॉगिन सफल! अब आप अपना ऑर्डर दे सकते हैं।'
+                    );
+                } else {
+                    showSuccess('Invalid OTP. Please try again.', 'Invalid OTP. Please try again.', 'অবৈধ OTP। আবার চেষ্টা করুন।', 'अमान्य OTP। कृपया पुनः प्रयास करें।');
+                }
+            });
+            
+            // Place order
+            placeOrderBtn.addEventListener('click', function() {
+                if (!isLoggedIn) {
+                    showSuccess('Please login first', 'Please login first', 'প্রথমে লগইন করুন', 'पहले लॉगिन करें');
+                    return;
+                }
+                
+                const orderType = document.getElementById('orderType').value;
+                const orderDetails = document.getElementById('orderDetails').value;
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                
+                if (!orderDetails.trim()) {
+                    showSuccess('Please enter order details', 'Please enter order details', 'অর্ডার বিবরণ লিখুন', 'ऑर्डर विवरण दर्ज करें');
+                    return;
+                }
+                
+                // In a real app, this would send to WhatsApp API
+                const whatsappNumber = '8926702629';
+                const message = `আমি তোমার কাছ থেকে অর্ডার করব\n\nOrder Type: ${orderType}\nDetails: ${orderDetails}\nPhone: ${phoneNumber}`;
+                
+                // Simulate WhatsApp order confirmation
+                const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                
+                // Show success message with WhatsApp link
+                const currentLang = document.documentElement.getAttribute('data-lang');
+                let title = 'Order Placed Successfully!';
+                let messageText = 'Order details have been sent to WhatsApp. Click "Open WhatsApp" to confirm your order.';
+                
+                if (currentLang === 'bn') {
+                    title = 'অর্ডার সফলভাবে স্থাপন করা হয়েছে!';
+                    messageText = 'অর্ডার বিবরণ WhatsApp এ পাঠানো হয়েছে। আপনার অর্ডার নিশ্চিত করতে "WhatsApp খুলুন" ক্লিক করুন।';
+                } else if (currentLang === 'hi') {
+                    title = 'ऑर्डर सफलतापूर्वक दिया गया!';
+                    messageText = 'ऑर्डर विवरण WhatsApp पर भेजा गया है। अपना ऑर्डर पुष्टि करने के लिए "WhatsApp खोलें" पर क्लिक करें।';
+                }
+                
+                document.getElementById('successTitle').textContent = title;
+                document.getElementById('successTitleBn').textContent = title;
+                document.getElementById('successTitleHi').textContent = title;
+                document.getElementById('successMessage').innerHTML = `
+                    ${messageText}
+                    <div class="mt-2">
+                        <a href="${whatsappLink}" target="_blank" class="btn btn-primary" style="margin-top: 15px;">
+                            <i class="fab fa-whatsapp"></i>
+                            <span class="en">Open WhatsApp</span>
+                            <span class="bn hidden">WhatsApp খুলুন</span>
+                            <span class="hi hidden">WhatsApp खोलें</span>
+                        </a>
+                    </div>
+                `;
+                
+                document.getElementById('successModal').style.display = 'flex';
+            });
+        }
+
+        // AI Chat System
+        function initChatSystem() {
+            const chatBody = document.getElementById('chatBody');
+            const chatInput = document.getElementById('chatInput');
+            const sendChatBtn = document.getElementById('sendChatBtn');
+            
+            // Predefined AI responses
+            const aiResponses = {
+                en: {
+                    greetings: ["Hello! How can I help you with your design needs today?", "Hi there! What design service are you looking for?", "Welcome! I'm here to assist with your graphic design questions."],
+                    pricing: ["Logo design starts at ₹1,500, banner design at ₹800, and social media posts at ₹300 per design. Custom quotes available.", "Our pricing depends on the complexity. Basic logos from ₹1,500, detailed illustrations from ₹3,000."],
+                    process: ["Order process: 1) Login with WhatsApp, 2) Choose design type, 3) Provide details, 4) Confirm via WhatsApp.", "First, login with your phone number via WhatsApp. Then browse portfolio or describe your design needs."],
+                    portfolio: ["You can view my portfolio in the 'Portfolio' section above. I specialize in logos, banners, social media graphics, and custom designs."],
+                    delivery: ["Delivery time depends on complexity: Simple designs 1-2 days, complex projects 3-5 days. Rush delivery available for extra charge."],
+                    payment: ["We accept UPI, bank transfer, and cash on delivery for local clients. 50% advance for custom projects."],
+                    default: ["I can help you with design services, pricing, order process, portfolio viewing, and delivery times. What would you like to know?", "For specific inquiries, please provide more details about your design needs."]
+                },
+                bn: {
+                    greetings: ["হ্যালো! আজ আমি আপনার ডিজাইন প্রয়োজনে কীভাবে সাহায্য করতে পারি?", "হাই! আপনি কোন ডিজাইন সেবা খুঁজছেন?", "স্বাগতম! আমি আপনার গ্রাফিক ডিজাইন প্রশ্নে সহায়তা করতে এখানে আছি।"],
+                    pricing: ["লোগো ডিজাইন ₹1,500 থেকে শুরু, ব্যানার ডিজাইন ₹800, এবং সোশ্যাল মিডিয়া পোস্ট প্রতি ডিজাইন ₹300। কাস্টম কোট উপলব্ধ।", "আমাদের মূল্য নির্ভর করে জটিলতার উপর। বেসিক লোগো ₹1,500 থেকে, বিস্তারিত চিত্রণ ₹3,000 থেকে।"],
+                    process: ["অর্ডার প্রক্রিয়া: 1) WhatsApp দিয়ে লগইন করুন, 2) ডিজাইন প্রকার চয়ন করুন, 3) বিবরণ প্রদান করুন, 4) WhatsApp এর মাধ্যমে নিশ্চিত করুন।", "প্রথমে, WhatsApp এর মাধ্যমে আপনার ফোন নম্বর দিয়ে লগইন করুন। তারপর পোর্টফোলিও ব্রাউজ করুন বা আপনার ডিজাইন প্রয়োজনীয়তা বর্ণনা করুন।"],
+                    portfolio: ["আপনি উপরের 'পোর্টফোলিও' বিভাগে আমার পোর্টফোলিও দেখতে পারেন। আমি লোগো, ব্যানার, সোশ্যাল মিডিয়া গ্রাফিক্স এবং কাস্টম ডিজাইনে বিশেষজ্ঞ।"],
+                    delivery: ["ডেলিভারি সময় জটিলতার উপর নির্ভর করে: সরল ডিজাইন 1-2 দিন, জটিল প্রকল্প 3-5 দিন। অতিরিক্ত চার্জের জন্য দ্রুত ডেলিভারি উপলব্ধ।"],
+                    payment: ["আমরা UPI, ব্যাঙ্ক ট্রান্সফার এবং স্থানীয় ক্লায়েন্টদের জন্য ক্যাশ অন ডেলিভারি গ্রহণ করি। কাস্টম প্রকল্পের জন্য 50% অগ্রিম।"],
+                    default: ["আমি আপনাকে ডিজাইন সেবা, মূল্য, অর্ডার প্রক্রিয়া, পোর্টফোলিও দেখা এবং ডেলিভারি সময় সহ সাহায্য করতে পারি। আপনি কী জানতে চান?", "নির্দিষ্ট জিজ্ঞাসার জন্য, দয়া করে আপনার ডিজাইন প্রয়োজনীয়তা সম্পর্কে আরও বিবরণ প্রদান করুন।"]
+                },
+                hi: {
+                    greetings: ["नमस्ते! आज मैं आपकी डिज़ाइन आवश्यकताओं में कैसे मदद कर सकता हूं?", "हाय! आप कौन सी डिज़ाइन सेवा ढूंढ रहे हैं?", "स्वागत है! मैं आपके ग्राफिक डिज़ाइन प्रश्नों में सहायता के लिए यहां हूं।"],
+                    pricing: ["लोगो डिज़ाइन ₹1,500 से शुरू, बैनर डिज़ाइन ₹800, और सोशल मीडिया पोस्ट प्रति डिज़ाइन ₹300। कस्टम कोट उपलब्ध।", "हमारी कीमत जटिलता पर निर्भर करती है। बेसिक लोगो ₹1,500 से, विस्तृत चित्रण ₹3,000 से।"],
+                    process: ["ऑर्डर प्रक्रिया: 1) WhatsApp के साथ लॉगिन करें, 2) डिज़ाइन प्रकार चुनें, 3) विवरण प्रदान करें, 4) WhatsApp के माध्यम से पुष्टि करें।", "पहले, WhatsApp के माध्यम से अपने फ़ोन नंबर से लॉगिन करें। फिर पोर्टफोलियो ब्राउज़ करें या अपनी डिज़ाइन आवश्यकताओं का वर्णन करें।"],
+                    portfolio: ["आप ऊपर 'पोर्टफोलियो' अनुभाग में मेरा पोर्टफोलियो देख सकते हैं। मैं लोगो, बैनर, सोशल मीडिया ग्राफिक्स और कस्टम डिज़ाइन में विशेषज्ञता रखता हूं।"],
+                    delivery: ["डिलीवरी समय जटिलता पर निर्भर करता है: सरल डिज़ाइन 1-2 दिन, जटिल परियोजनाएं 3-5 दिन। अतिरिक्त शुल्क के लिए रश डिलीवरी उपलब्ध।"],
+                    payment: ["हम UPI, बैंक ट्रांसफर और स्थानीय ग्राहकों के लिए कैश ऑन डिलीवरी स्वीकार करते हैं। कस्टम परियोजनाओं के लिए 50% अग्रिम।"],
+                    default: ["मैं आपकी डिज़ाइन सेवाओं, मूल्य निर्धारण, ऑर्डर प्रक्रिया, पोर्टफोलियो देखने और डिलीवरी समय में मदद कर सकता हूं। आप क्या जानना चाहेंगे?", "विशिष्ट पूछताछ के लिए, कृपया अपनी डिज़ाइन आवश्यकताओं के बारे में अधिक जानकारी प्रदान करें।"]
+                }
+            };
+            
+            // Send message function
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (!message) return;
+                
+                // Add user message
+                addMessageToChat(message, 'user');
+                
+                // Clear input
+                chatInput.value = '';
+                
+                // Simulate AI thinking
+                setTimeout(() => {
+                    // Get AI response
+                    const aiResponse = getAIResponse(message);
+                    addMessageToChat(aiResponse, 'bot');
+                }, 1000);
+            }
+            
+            // Add message to chat
+            function addMessageToChat(message, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}-message`;
+                messageDiv.innerHTML = `<p>${message}</p>`;
+                chatBody.appendChild(messageDiv);
+                
+                // Scroll to bottom
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+            
+            // Get AI response based on message
+            function getAIResponse(message) {
+                const lang = document.documentElement.getAttribute('data-lang');
+                const responses = aiResponses[lang];
+                const lowerMessage = message.toLowerCase();
+                
+                // Check for keywords
+                if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                    return responses.greetings[Math.floor(Math.random() * responses.greetings.length)];
+                } else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('rate')) {
+                    return responses.pricing[Math.floor(Math.random() * responses.pricing.length)];
+                } else if (lowerMessage.includes('process') || lowerMessage.includes('order') || lowerMessage.includes('how to order')) {
+                    return responses.process[Math.floor(Math.random() * responses.process.length)];
+                } else if (lowerMessage.includes('portfolio') || lowerMessage.includes('work') || lowerMessage.includes('designs')) {
+                    return responses.portfolio[Math.floor(Math.random() * responses.portfolio.length)];
+                } else if (lowerMessage.includes('delivery') || lowerMessage.includes('time') || lowerMessage.includes('days')) {
+                    return responses.delivery[Math.floor(Math.random() * responses.delivery.length)];
+                } else if (lowerMessage.includes('payment') || lowerMessage.includes('pay') || lowerMessage.includes('money')) {
+                    return responses.payment[Math.floor(Math.random() * responses.payment.length)];
+                } else if (lowerMessage.includes('emergency') || lowerMessage.includes('urgent') || lowerMessage.includes('human')) {
+                    return `For immediate human assistance, please WhatsApp directly: +91 8926702629`;
+                } else {
+                    return responses.default[Math.floor(Math.random() * responses.default.length)];
+                }
+            }
+            
+            // Event listeners
+            sendChatBtn.addEventListener('click', sendMessage);
+            
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        }
+
+        // Language Switcher
+        function initLanguageSwitcher() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const currentLang = document.documentElement.getAttribute('data-lang') || 'en';
+            
+            // Set active language button
+            langButtons.forEach(btn => {
+                if (btn.getAttribute('data-lang') === currentLang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+                
+                // Add click event
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    
+                    // Update active button
+                    langButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update language
+                    switchLanguage(lang);
+                });
+            });
+        }
+        
+        // Switch language
+        function switchLanguage(lang) {
+            // Update HTML attribute
+            document.documentElement.setAttribute('data-lang', lang);
+            
+            // Show/hide language-specific elements
+            document.querySelectorAll('.en, .bn, .hi').forEach(element => {
+                element.classList.add('hidden');
+            });
+            
+            document.querySelectorAll(`.${lang}`).forEach(element => {
+                element.classList.remove('hidden');
+            });
+            
+            // Update chat greetings if chat exists
+            if (window.getAIResponse) {
+                const chatBody = document.getElementById('chatBody');
+                if (chatBody) {
+                    // Clear chat except first message
+                    const firstMessage = chatBody.querySelector('.bot-message');
+                    chatBody.innerHTML = '';
+                    if (firstMessage) {
+                        chatBody.appendChild(firstMessage);
+                    }
+                    
+                    // Add new greeting in selected language
+                    const aiResponses = {
+                        en: "Hello! I'm your AI Design Assistant. How can I help you today? You can ask about design services, pricing, order process, or anything else related to JS SUMAN GFX.",
+                        bn: "হ্যালো! আমি আপনার এআই ডিজাইন সহকারী। আজ আমি আপনাকে কীভাবে সাহায্য করতে পারি? আপনি ডিজাইন সেবা, মূল্য, অর্ডার প্রক্রিয়া বা জেএস সুমন জিএফএক্স সম্পর্কিত অন্য কোনও বিষয় জিজ্ঞাসা করতে পারেন।",
+                        hi: "नमस्ते! मैं आपका एआई डिज़ाइन सहायक हूं। आज मैं आपकी कैसे मदद कर सकता हूं? आप डिज़ाइन सेवाओं, मूल्य निर्धारण, ऑर्डर प्रक्रिया या जेएस सुमन GFX से संबंधित कुछ भी पूछ सकते हैं।"
+                    };
+                    
+                    const greetingDiv = document.createElement('div');
+                    greetingDiv.className = 'message bot-message';
+                    greetingDiv.innerHTML = `<p>${aiResponses[lang]}</p>`;
+                    chatBody.appendChild(greetingDiv);
+                }
+            }
+        }
+
+        // Mobile Menu
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileNav.classList.toggle('hidden');
+                
+                // Change icon
+                const icon = mobileMenuBtn.querySelector('i');
+                if (mobileNav.classList.contains('hidden')) {
+                    icon.className = 'fas fa-bars';
+                } else {
+                    icon.className = 'fas fa-times';
+                }
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('#mobileNav a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNav.classList.add('hidden');
+                    mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+                });
+            });
+        }
+
+        // Modals
+        function initModals() {
+            // OTP Modal
+            const otpModal = document.getElementById('otpModal');
+            const closeOtpModal = document.getElementById('closeOtpModal');
+            
+            closeOtpModal.addEventListener('click', function() {
+                otpModal.style.display = 'none';
+            });
+            
+            // Success Modal
+            const successModal = document.getElementById('successModal');
+            const closeSuccessModal = document.getElementById('closeSuccessModal');
+            const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+            
+            closeSuccessModal.addEventListener('click', function() {
+                successModal.style.display = 'none';
+            });
+            
+            closeSuccessBtn.addEventListener('click', function() {
+                successModal.style.display = 'none';
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === otpModal) {
+                    otpModal.style.display = 'none';
+                }
+                if (e.target === successModal) {
+                    successModal.style.display = 'none';
+                }
+            });
+        }
+
+        // Show success message
+        function showSuccess(titleEn, messageEn, messageBn, messageHi) {
+            const currentLang = document.documentElement.getAttribute('data-lang');
+            
+            document.getElementById('successTitle').textContent = titleEn;
+            document.getElementById('successTitleBn').textContent = titleEn;
+            document.getElementById('successTitleHi').textContent = titleEn;
+            
+            if (currentLang === 'en') {
+                document.getElementById('successMessage').textContent = messageEn;
+            } else if (currentLang === 'bn') {
+                document.getElementById('successMessage').textContent = messageBn;
+            } else if (currentLang === 'hi') {
+                document.getElementById('successMessage').textContent = messageHi;
+            }
+            
+            document.getElementById('successModal').style.display = 'flex';
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
